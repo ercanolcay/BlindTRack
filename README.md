@@ -43,7 +43,7 @@ I provide the Configurator in two primary formats to ensure portability:
    sudo usermod -a -G dialout $USER
   ```
 ---
-## 🤝 Acknowledgments
+## 🤝 Acknowledgements
 Special thanks to the authors of these projects which inspired BlueTRace:
 - **SQ8VPS (VP-Digi):** For the [vp-digi](https://github.com/sq8vps/vp-digi) project.
 - **unsword01:** For the [AnyTone-AT779-Mic-Serial](https://github.com/unsword01/AnyTone-AT779-Mic-Serial) project.
