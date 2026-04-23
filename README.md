@@ -30,11 +30,18 @@ I provide the Configurator in two primary formats to ensure portability:
 - **Usage:** Download and run. No Python installation, drivers, or external libraries required. 
 - **Build Method:** Compiled using PyInstaller with the `--onefile --windowed` flags for a clean, single-file experience.
 
-#### 2. Linux (Python Script)
-- **Format:** `BlueTRace_Config.py` (Standalone Script).
-- **Usage:** Run directly via terminal: `python3 BlueTRace_Config.py`.
-- **Dependencies:** Requires `pyserial` and `tkinter`. Ensure your user is in the `dialout` group to access serial ports.
+#### 2. Linux (Standalone Binary)
+- **Format:** `BlueTRace_Config` (**Linux ELF Executable**).
+- **Usage:** Download the binary, set executable permissions, and run:
+  ```bash
+  chmod +x BlueTRace_Config
+  ./BlueTRace_Config```
+- **Architecture:** Compiled for x86_64 (Standard PC/Laptop Linux).
 
+- **Permissions (Critical):** To access serial ports (/dev/ttyUSB0 or /dev/ttyACM0) without root/sudo, your user must be part of the dialout group. Run the following command:
+  ```bash
+   sudo usermod -a -G dialout $USER
+  ```
 ---
 ## 🤝 Acknowledgments
 Special thanks to the authors of these projects which inspired BlueTRace:
