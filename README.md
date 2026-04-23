@@ -35,7 +35,7 @@ I provide the Configurator in two primary formats to ensure portability:
 - **Usage:** Download the binary, set executable permissions, and run:
   ```bash
   chmod +x BlueTRace_Config
-  ./BlueTRace_Config```
+  ./BlueTRace_Config
 - **Architecture:** Compiled for x86_64 (Standard PC/Laptop Linux).
 
 - **Permissions (Critical):** To access serial ports (/dev/ttyUSB0 or /dev/ttyACM0) without root/sudo, your user must be part of the dialout group. Run the following command:
