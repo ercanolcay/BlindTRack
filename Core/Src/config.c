@@ -45,7 +45,7 @@ void Save_Config_To_Flash(void) {
         HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, FLASH_ADDR_CONFIG + (i * 4), data_ptr[i]);
     }
 
-    HAL_FLASH_Lock(); // Unlock the flash again for safety
+    HAL_FLASH_Lock(); // Flash yazma bitti, kilitle
 }
 
 void Load_Config_From_Flash(void) {
@@ -57,12 +57,14 @@ void Load_Config_From_Flash(void) {
         memcpy(&device_config, flash_config, sizeof(TrackerConfig_t));
     } else {
     	// Flash is empty (or the device is running for the first time). Load factory defaults.
-    	strcpy(device_config.callsign, "N0CALL");
+    	strncpy(device_config.callsign, "N0CALL", sizeof(device_config.callsign) - 1);
+    	device_config.callsign[sizeof(device_config.callsign) - 1] = '\0';
     	device_config.ssid = 12;
     	device_config.interval = 2;
     	device_config.table_id = '\\'; // Default: Secondary Table
     	device_config.symbol = ')';
-    	strcpy(device_config.comment, "BlueTRace Aprs Tracker");
+    	strncpy(device_config.comment, "BlueTRace Aprs Tracker", sizeof(device_config.comment) - 1);
+    	device_config.comment[sizeof(device_config.comment) - 1] = '\0';
 
         Save_Config_To_Flash(); // Upload defaults to flash
     }
@@ -70,23 +72,35 @@ void Load_Config_From_Flash(void) {
 
 void Parse_Config(char* payload) {
     char* token = strtok(payload, ",");
-    if(token) strcpy(device_config.callsign, token);
+    if(token) {
+        strncpy(device_config.callsign, token, sizeof(device_config.callsign) - 1);
+        device_config.callsign[sizeof(device_config.callsign) - 1] = '\0';
+    }
 
     token = strtok(NULL, ",");
-    if(token) device_config.ssid = atoi(token);
+    if(token) {
+        int ssid = atoi(token);
+        device_config.ssid = (ssid < 0) ? 0 : (ssid > 15) ? 15 : (uint8_t)ssid;
+    }
 
     token = strtok(NULL, ",");
-    if(token) device_config.interval = atoi(token);
+    if(token) {
+        int interval = atoi(token);
+        device_config.interval = (interval < 1) ? 1 : (interval > 99) ? 99 : (uint8_t)interval;
+    }
 
     token = strtok(NULL, ",");
-        if(token && strlen(token) >= 2) {
-            device_config.table_id = token[0];
-            device_config.symbol = token[1];
-        }
+    if(token && strlen(token) >= 2) {
+        device_config.table_id = token[0];
+        device_config.symbol = token[1];
+    }
 
     // The comment may contain commas or spaces, so read until "\r" or "\n" is encountered
     token = strtok(NULL, "\r\n");
-    if(token) strcpy(device_config.comment, token);
+    if(token) {
+        strncpy(device_config.comment, token, sizeof(device_config.comment) - 1);
+        device_config.comment[sizeof(device_config.comment) - 1] = '\0';
+    }
 
     // New settings have been successfully applied to RAM; save to Flash to make them persistent!
     Save_Config_To_Flash();
