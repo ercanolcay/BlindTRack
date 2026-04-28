@@ -18,7 +18,7 @@ typedef struct {
     char table_id;
     char symbol;
     char comment[50];
-} TrackerConfig_t;
+} __attribute__((packed)) TrackerConfig_t;
 
 
 extern TrackerConfig_t device_config;
