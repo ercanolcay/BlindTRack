@@ -42,8 +42,10 @@ UART_HandleTypeDef huart2;
 UART_HandleTypeDef huart3;
 
 /* USER CODE BEGIN PV */
-uint8_t g_rxByte; // GPS bytes
-uint8_t rx_byte3; char rx_buf3[128]; uint8_t rx_idx3 = 0;
+volatile uint8_t g_rxByte;        // GPS bytes (interrupt)
+volatile uint8_t rx_byte3;         // Config UART byte (interrupt)
+char             rx_buf3[128];     // Config UART buffer
+volatile uint8_t rx_idx3 = 0;     // Config UART buffer index (interrupt)
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -407,7 +409,9 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
         }
 }
 
-void WdogReset(void) {}
+void WdogReset(void) {
+    /* IWDG kullanılmıyor — gerekirse HAL_IWDG_Refresh(&hiwdg) ekle */
+}
 /* USER CODE END 4 */
 
 /**
