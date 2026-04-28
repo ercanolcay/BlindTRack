@@ -118,7 +118,8 @@ void Ax25WriteTrackerFrame(float lat, float lon, float speed, float course) {
             (unsigned int)spd,
             device_config.comment);
 
-    for (int i = 0; i < strlen(payload); i++)
+    int payload_len = strlen(payload);
+    for (int i = 0; i < payload_len; i++)
         frame[frame_len++] = payload[i];
 
     // 4. CRC VE 5. POSTAMBLE
