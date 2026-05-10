@@ -52,3 +52,8 @@ Special thanks to the authors of these projects which inspired BlueTRace:
 **Ercan Olcay** [ercanolcay.com](http://ercanolcay.com)
 
 ---
+## 🔑 License
+
+Project is licensed under the APGL-3.0 License - see the [LICENSE](LICENSE) file for details.
+
+---
