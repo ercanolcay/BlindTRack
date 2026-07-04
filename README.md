@@ -20,7 +20,7 @@ The design includes a GPS interface, a robust PTT switching stage, and precision
 ## 🖥 BlindTRack Configurator Tool
 The **BlindTRack Configurator** is a modern utility that allows users to tune APRS parameters (Callsign, SSID, TX Interval, Symbols, and Comments) in real-time.
 
-![BlindTRack Configuration Tool](DOC/BlindTRack_Config.jpg)
+![BlindTRack Configuration Tool](DOC/BlindTRack_Configurator.png)
 
 ### Deployment Options (Available in [Releases](../../releases))
 I provide the Configurator in two primary formats to ensure portability:
