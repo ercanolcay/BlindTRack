@@ -1,7 +1,7 @@
 /*
   ******************************************************************************
   * @file           : gps_handler.h
-  * @brief          : Ercan OLCAY # BlueTRace APRS Tracker
+  * @brief          : Ercan OLCAY # BlindTRack APRS Tracker
   * 23.04.2026
   ******************************************************************************
   */
