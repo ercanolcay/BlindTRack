@@ -34,8 +34,8 @@ I provide the Configurator in two primary formats to ensure portability:
 - **Format:** `BlindTRack_Config` (**Linux ELF Executable**).
 - **Usage:** Download the binary, set executable permissions, and run:
   ```bash
-  chmod +x BlindTRack_Config
-  ./BlindTRack_Config
+  chmod +x BlindTRack_Configurator_Linux
+  ./BlindTRack_Configurator_Linux
 - **Architecture:** Compiled for x86_64 (Standard PC/Laptop Linux).
 
 - **Permissions (Critical):** To access serial ports (/dev/ttyUSB0 or /dev/ttyACM0) without root/sudo, your user must be part of the dialout group. Run the following command:
