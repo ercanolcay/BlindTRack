@@ -89,15 +89,11 @@ void Tracker_Run(void) {
     uint32_t now = HAL_GetTick();
 
     if (device_config.smart_beacon) {
-        // SmartBeaconing mode
-        uint32_t interval = SmartBeacon_Interval();
-        uint8_t  time_due = (now - last_tx) >= interval;
-        uint8_t  turn_due = SmartBeacon_TurnDetected() &&
-                            ((now - last_tx) >= 5000UL); // min 5s between turn beacons
+            uint32_t interval = SmartBeacon_Interval();
 
-        if (time_due || turn_due) {
-            Transmit_Packet();
-        }
+            if ((now - last_tx) >= interval) {
+                Transmit_Packet();
+            }
     } else {
         // Fixed interval mode
         if ((now - last_tx) >= ((uint32_t)device_config.interval * 60000UL)) {
