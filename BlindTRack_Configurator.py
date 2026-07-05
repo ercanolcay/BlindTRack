@@ -12,14 +12,26 @@ SB_PROFILES = {
 
 SB_DESCRIPTIONS = {
     "OFF": "Fixed interval mode.\nBeacon is sent at every INTERVAL minutes regardless of speed.",
-    "ON":  "SmartBeaconing active.\nStopped / slow (<10 km/h): beacon every 10 min.\nFast (>90 km/h): beacon every 30 sec.\nTurn >28°: beacon sent immediately.\nInterval field is ignored.",
+    "ON":  (
+        "SmartBeaconing active. Interval field is ignored.\n"
+        "\n"
+        "  Speed              Beacon interval\n"
+        "  ─────────────────────────────────\n"
+        "   0 -  10 km/h  →  every 10 min\n"
+        "  ~20 km/h        →  every  8.5 min\n"
+        "  ~30 km/h        →  every  7 min\n"
+        "  ~50 km/h        →  every  5 min\n"
+        "  ~70 km/h        →  every  2.5 min\n"
+        "  ~80 km/h        →  every  1.5 min\n"
+        "   90+ km/h       →  every 30 sec"
+    ),
 }
 
 class BlindTRackConfigurator:
     def __init__(self, root):
         self.root = root
         self.root.title("BlindTRack Configurator Terminal")
-        self.root.geometry("500x500")
+        self.root.geometry("500x600")
         self.root.configure(bg="#0a0a0a")
 
         self.symbols = {
@@ -149,9 +161,9 @@ class BlindTRackConfigurator:
         # Description box
         self.sb_desc = tk.Label(frame, text=SB_DESCRIPTIONS["OFF"],
                                 bg="#0d1a0d", fg="#4a8a4a",
-                                font=f_desc, justify="left",
+                                font=("Consolas", 9), justify="left",
                                 anchor="w", padx=8, pady=6,
-                                wraplength=420)
+                                wraplength=0)
         self.sb_desc.grid(row=row, column=0, columnspan=3, sticky="ew", pady=(0,10))
         row += 1
 
